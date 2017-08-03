@@ -10,8 +10,7 @@ REPO=mpsallowances.parliament.uk
 LATEST_REL=$(GITHUB_API)/repos/$(ORG)/$(REPO)/releases/latest
 REL_TAG=$(shell curl -s $(LATEST_REL) | jq -r '.tag_name')
 
-
-checkout_to_release: 
+checkout_to_release:
 	git checkout -b release $(REL_TAG)
 
 deploy_to_release:
@@ -21,4 +20,3 @@ deploy_to_release:
 		--exclude "Makefile" \
 		--exclude "README.md" \
 		--acl=public-read --delete . s3://$(AWS_ACCOUNT).mps-allowances
-
